@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/addHomeCardTmp.dart';
+import 'package:my_app/signUpScreen.dart';
 import 'package:my_app/supabase_manager.dart';
 import 'subjectCardList.dart';
 
@@ -18,7 +19,7 @@ class _HomeCardState extends State<HomeCard> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-          height: 600,
+          height: 400,
           width: 500,
           child: Column(
             children: [
@@ -69,16 +70,23 @@ class _HomeCardState extends State<HomeCard> {
                     }),
               ),
               IconButton(
-                  onPressed: () async {
-                    final nav = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AddHomeCardTmp(),
-                      ),
-                    );
-                    setState(() {});
-                  },
-                  icon: const Icon(Icons.add))
+                onPressed: () async {
+                  final nav = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const AddHomeCardTmp(),
+                    ),
+                  );
+                  setState(() {});
+                },
+                icon: const Icon(Icons.add),
+              ),
+              TextButton(
+                onPressed: () {
+                  supabaseManager.logOut();
+                },
+                child: const Text('Log out'),
+              ),
             ],
           ),
         ),

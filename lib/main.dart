@@ -4,7 +4,9 @@ import 'package:my_app/addSubjectForm.dart';
 import 'package:my_app/addFlashCard.dart';
 import 'package:my_app/flashCardList.dart';
 import 'package:my_app/homeCard.dart';
+import 'package:my_app/login.dart';
 import 'package:my_app/subjectCardList.dart';
+import 'signUpScreen.dart';
 
 import 'addHomeCardTmp.dart';
 
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
       '/add_subject': (_) => const AddSubjectForm(),
       '/subcject': (_) => const Subject(),
       '/add_home_card': (_) => const AddHomeCardTmp(),
-    }, home: const HomeCard());
+      '/sign_up_screen': (_) => const SignupScreen(),
+      '/home_card': (_) => const HomeCard(),
+    }, home: const SignupScreen());
   }
 }

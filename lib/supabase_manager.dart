@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase/supabase.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter/material.dart';
 
-var supabaseUrl = dotenv.env["API_URL"] ?? "Api not faund";
-var supabaseKey = dotenv.env["API_KEY"] ?? '';
+var supabaseUrl = dotenv.env["API_MYURL"] ?? "Api not faund";
+var supabaseKey = dotenv.env["API_MYKEY"] ?? '';
 
 class SupabaseManager {
   final client = SupabaseClient(
@@ -66,21 +68,24 @@ class SupabaseManager {
   deleteData(String datatable, var id) async {
     var respons = await client.from(datatable).delete().eq('id', id).execute();
   }
+
+  Future<void> signup(context, String email, String password) async {
+    //debugPrint("emial $email password $password");
+    final result = await client.auth.signUp(email, password);
+    if (result.data != null) {
+      Navigator.pushReplacementNamed(context, '/login');
+    } else if (result.error!.message != null) {}
+  }
+
+  Future<void> signInUser(
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
+    //debugPrint("email: $email password: $password");
+    final result = await client.auth.signIn(email: email, password: password);
+    if (result.data != null) {
+      Navigator.pushReplacementNamed(context, '/home_card');
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
- // signUpUser(String email, String password) async {
-  //   await client.auth.signUp(email, password);
-  // }
-
-  //const supabaseUrl = 'https://gznnspnddiyuhdhbzotz.supabase.co';
-  // const supabaseKey =
-// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd6bm5zcG5kZGl5dWhkaGJ6b3R6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjIwMzkzNDksImV4cCI6MTk3NzYxNTM0OX0.lTLk-z2e3zCV31TVfzxR6UKDO9CuDgRVIH5LVCibW1Q';
-
