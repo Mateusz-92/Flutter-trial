@@ -56,14 +56,13 @@ class _SignupScreenState extends State<SignupScreen> {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 15.0, right: 15.0, top: 15, bottom: 0),
-                //padding: EdgeInsets.symmetric(horizontal: 15),
                 child: TextFormField(
                   obscureText: true,
                   controller: _passwordController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
-                      hintText: 'Enter secure password'),
+                      hintText: 'Enter  password'),
                   validator: (String? value) {
                     if (value!.isEmpty) {
                       return 'Invalid password';
@@ -108,7 +107,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     );
                   },
-                  child: const Text('Already a User? Login'))
+                  child: const Text(' Login'))
             ],
           ),
         ),

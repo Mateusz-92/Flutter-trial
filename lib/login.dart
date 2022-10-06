@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
-                      hintText: 'Enter a valid email'),
+                      hintText: 'Enter  email'),
                   validator: (String? value) {
                     if (value!.isEmpty || !value.contains('@')) {
                       return 'Email is not valid';

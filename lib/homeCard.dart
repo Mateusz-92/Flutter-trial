@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/addHomeCardTmp.dart';
+import 'package:my_app/login.dart';
 import 'package:my_app/signUpScreen.dart';
 import 'package:my_app/supabase_manager.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'subjectCardList.dart';
 
 class HomeCard extends StatefulWidget {
@@ -80,12 +82,6 @@ class _HomeCardState extends State<HomeCard> {
                   setState(() {});
                 },
                 icon: const Icon(Icons.add),
-              ),
-              TextButton(
-                onPressed: () {
-                  supabaseManager.logOut();
-                },
-                child: const Text('Log out'),
               ),
             ],
           ),

@@ -4,8 +4,8 @@ import 'package:supabase/supabase.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 
-var supabaseUrl = dotenv.env["API_MYURL"] ?? "Api not faund";
-var supabaseKey = dotenv.env["API_MYKEY"] ?? '';
+var supabaseUrl = dotenv.env["API_URL"] ?? "Api not faund";
+var supabaseKey = dotenv.env["API_KEY"] ?? '';
 
 class SupabaseManager {
   final client = SupabaseClient(
@@ -74,7 +74,7 @@ class SupabaseManager {
     final result = await client.auth.signUp(email, password);
     if (result.data != null) {
       Navigator.pushReplacementNamed(context, '/login');
-    } else if (result.error!.message != null) {}
+    }
   }
 
   Future<void> signInUser(
