@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       '/add_home_card': (_) => const AddHomeCardTmp(),
       '/sign_up_screen': (_) => const SignupScreen(),
       '/home_card': (_) => const HomeCard(),
+      '/login': (_) => const LoginScreen(),
     }, home: const SignupScreen());
   }
 }

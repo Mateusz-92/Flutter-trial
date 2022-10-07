@@ -18,6 +18,7 @@ class _HomeCardState extends State<HomeCard> {
 
   @override
   Widget build(BuildContext context) {
+    var user = ModalRoute.of(context)!.settings.arguments.toString();
     return Scaffold(
       body: Center(
         child: SizedBox(
@@ -28,7 +29,7 @@ class _HomeCardState extends State<HomeCard> {
               Expanded(
                 child: FutureBuilder(
                     // future: supabaseManager.getCardBoxData(datatable),
-                    future: supabaseManager.getCardBoxData(datatable),
+                    future: supabaseManager.getCardBoxData(datatable, user),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.data == null)
                         return (const Text('...Loading'));
@@ -42,12 +43,15 @@ class _HomeCardState extends State<HomeCard> {
                                   child: ListTile(
                                     onTap: () {
                                       var id = snapshot.data[index]['id'];
+
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (_) => const Subject(),
                                           settings: RouteSettings(
-                                            arguments: id,
+                                            arguments: {
+                                              id,
+                                            },
                                           ),
                                         ),
                                       );
@@ -76,13 +80,18 @@ class _HomeCardState extends State<HomeCard> {
                   final nav = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const AddHomeCardTmp(),
-                    ),
+                        builder: (_) => const AddHomeCardTmp(),
+                        settings: RouteSettings(arguments: user)),
                   );
                   setState(() {});
                 },
                 icon: const Icon(Icons.add),
               ),
+              IconButton(
+                  onPressed: () {
+                    supabaseManager.logout(context);
+                  },
+                  icon: const Icon(Icons.logout))
             ],
           ),
         ),

@@ -1,24 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:my_app/homeCard.dart';
 import 'package:supabase/supabase.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 
-var supabaseUrl = dotenv.env["API_URL"] ?? "Api not faund";
-var supabaseKey = dotenv.env["API_KEY"] ?? '';
+var supabaseUrl = dotenv.env["API_MYURL"] ?? "Api not faund";
+var supabaseKey = dotenv.env["API_MYKEY"] ?? '';
 
 class SupabaseManager {
   final client = SupabaseClient(
     supabaseUrl,
     supabaseKey,
   );
+  getUser() {
+    var user = client.auth.user();
+    return user?.id;
+  }
 
   var uuid = const Uuid();
-  getCardBoxData(String datatable) async {
-    var response = await client.from(datatable).select().execute();
+  getCardBoxData(String datatable, var user) async {
+    var response =
+        await client.from(datatable).select().eq('user_id', user).execute();
     if (response.error == null) {
       print('response.data: ${response.data}');
     }
+
     var dataList = response.data as List;
     return dataList;
   }
@@ -45,12 +53,9 @@ class SupabaseManager {
     ]).execute();
   }
 
-  addHomeCardData(
-    String datatableName,
-    var textForm,
-  ) async {
+  addHomeCardData(String datatableName, var textForm, var userId) async {
     await client.from(datatableName).insert([
-      {'name': textForm, 'id': uuid.v4()}
+      {'name': textForm, 'id': uuid.v4(), 'user_id': userId}
     ]).execute();
   }
 
@@ -82,10 +87,20 @@ class SupabaseManager {
     String email,
     String password,
   ) async {
-    //debugPrint("email: $email password: $password");
+    // debugPrint("email: $email password: $password");
     final result = await client.auth.signIn(email: email, password: password);
     if (result.data != null) {
-      Navigator.pushReplacementNamed(context, '/home_card');
+      final userId = client.auth.user()?.id;
+      Navigator.pushReplacementNamed(
+        context,
+        '/home_card',
+        arguments: userId,
+      );
     }
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await client.auth.signOut();
+    Navigator.pushReplacementNamed(context, '/login');
   }
 }

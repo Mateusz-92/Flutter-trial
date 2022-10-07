@@ -18,6 +18,8 @@ class _AddHomeCardTmpState extends State<AddHomeCardTmp> {
 
   @override
   Widget build(BuildContext context) {
+    var user = ModalRoute.of(context)!.settings.arguments.toString();
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 168, 199, 224),
       body: Center(
@@ -48,7 +50,7 @@ class _AddHomeCardTmpState extends State<AddHomeCardTmp> {
                 icon: const Icon(Icons.add_circle_sharp),
                 onPressed: () async {
                   supabaseManager
-                      .addHomeCardData(dataTable, homeCard.text)
+                      .addHomeCardData(dataTable, homeCard.text, user)
                       .toString();
                   setState(() {});
                   homeCard.text = '';

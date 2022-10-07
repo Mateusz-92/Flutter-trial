@@ -67,6 +67,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     if (value!.isEmpty) {
                       return 'Invalid password';
                     }
+                    if (value.length < 6) {
+                      return 'Password must have min 6 letters';
+                    }
                   },
                 ),
               ),
