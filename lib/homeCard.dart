@@ -26,11 +26,6 @@ class _HomeCardState extends State<HomeCard> {
           width: 500,
           child: Column(
             children: [
-              TextButton(
-                  onPressed: () {
-                    // print(supabaseManager.getCardBoxData(datatable));
-                  },
-                  child: Text('TEST')),
               Expanded(
                 child: FutureBuilder(
                     // future: supabaseManager.getCardBoxData(datatable),
