@@ -26,10 +26,15 @@ class _HomeCardState extends State<HomeCard> {
           width: 500,
           child: Column(
             children: [
+              TextButton(
+                  onPressed: () {
+                    // print(supabaseManager.getCardBoxData(datatable));
+                  },
+                  child: Text('TEST')),
               Expanded(
                 child: FutureBuilder(
                     // future: supabaseManager.getCardBoxData(datatable),
-                    future: supabaseManager.getCardBoxData(datatable, user),
+                    future: supabaseManager.getCardBoxData(datatable),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.data == null)
                         return (const Text('...Loading'));

@@ -1,32 +1,27 @@
+import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart';
 import 'package:my_app/homeCard.dart';
 import 'package:supabase/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-var supabaseUrl = dotenv.env["API_MYURL"] ?? "Api not faund";
-var supabaseKey = dotenv.env["API_MYKEY"] ?? '';
+var supabaseUrl = dotenv.env["API_URL"] ?? "Api not faund";
+var supabaseKey = dotenv.env["API_KEY"] ?? '';
+
+var client = SupabaseClient(supabaseUrl, supabaseKey);
 
 class SupabaseManager {
-  final client = SupabaseClient(
-    supabaseUrl,
-    supabaseKey,
-  );
-  getUser() {
-    var user = client.auth.user();
-    return user?.id;
-  }
-
   var uuid = const Uuid();
-  getCardBoxData(String datatable, var user) async {
-    var response =
-        await client.from(datatable).select().eq('user_id', user).execute();
+  getCardBoxData(String datatable) async {
+    var response = await client.from('card_box').select('*').execute();
+
     if (response.error == null) {
       print('response.data: ${response.data}');
     }
-
     var dataList = response.data as List;
     return dataList;
   }
@@ -87,10 +82,11 @@ class SupabaseManager {
     String email,
     String password,
   ) async {
-    // debugPrint("email: $email password: $password");
     final result = await client.auth.signIn(email: email, password: password);
+
     if (result.data != null) {
       final userId = client.auth.user()?.id;
+
       Navigator.pushReplacementNamed(
         context,
         '/home_card',
