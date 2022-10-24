@@ -24,8 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var userEmail = ModalRoute.of(context)!.settings.arguments.toString();
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -37,9 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _formKey,
           child: Column(
             children: <Widget>[
-              TextButton(
-                  onPressed: (() => {print(userEmail)}),
-                  child: Text('KLIKIII')),
               const SizedBox(
                 height: 200,
               ),
@@ -52,9 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: 'Email',
                       hintText: 'Enter  email'),
                   validator: (String? value) {
-                    if (value!.isEmpty ||
-                        !value.contains('@') ||
-                        value != userEmail) {
+                    if (value!.isEmpty || !value.contains('@')) {
                       return 'Email is not valid';
                     }
                   },

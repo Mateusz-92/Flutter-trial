@@ -41,6 +41,8 @@ class _StateHome extends State<ReoHomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var user = ModalRoute.of(context)!.settings.arguments.toString();
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120),
@@ -202,7 +204,8 @@ class _StateHome extends State<ReoHomeWidget> {
                       SizedBox(
                         height: 1000,
                         child: FutureBuilder(
-                            future: supabaseManager.getCardBoxData('card_box'),
+                            future: supabaseManager.getCardBoxData(
+                                'card_box', user),
                             builder: (context, AsyncSnapshot snapshot) {
                               if (snapshot.data == null) {
                                 return Text('loading...');

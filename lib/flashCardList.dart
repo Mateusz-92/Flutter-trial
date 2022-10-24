@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/homeCard.dart';
 import 'package:my_app/supabase_manager.dart';
 import 'addFlashCard.dart';
 
@@ -26,6 +27,16 @@ class _FlashCardListState extends State<FlashCardList> {
             width: 500,
             child: Column(
               children: [
+                BackButton(
+                  color: Colors.black,
+                  onPressed: () {
+                    Navigator.pop(context, () {
+                      setState(() {
+                        HomeCard();
+                      });
+                    });
+                  },
+                ),
                 Expanded(
                   child: FutureBuilder(
                       future: supabaseManager.getData(datatable, subjectId, id),

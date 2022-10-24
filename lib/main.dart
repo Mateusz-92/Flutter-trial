@@ -5,9 +5,6 @@ import 'package:my_app/addFlashCard.dart';
 import 'package:my_app/flashCardList.dart';
 import 'package:my_app/homeCard.dart';
 import 'package:my_app/login.dart';
-import 'package:my_app/reoCardBox.dart';
-import 'package:my_app/reohome.dart';
-
 import 'package:my_app/subjectCardList.dart';
 import 'signUpScreen.dart';
 
