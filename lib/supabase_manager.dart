@@ -53,6 +53,17 @@ class SupabaseManager {
     ]).execute();
   }
 
+  addSubjectData2(String datatableName, var textForm, var parentName,
+      var parentId, var id) async {
+    await client.from(datatableName).insert([
+      {
+        'name': textForm,
+        'id': id,
+        parentName: parentId,
+      }
+    ]).execute();
+  }
+
   addSubjectData(
       String datatableName, var textForm, var parentName, var parentId) async {
     await client.from(datatableName).insert([

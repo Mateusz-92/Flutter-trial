@@ -17,7 +17,9 @@ class _FlashCardListState extends State<FlashCardList> {
 
   @override
   Widget build(BuildContext context) {
-    final id = ModalRoute.of(context)!.settings.arguments.toString();
+    final args = ModalRoute.of(context)!.settings.arguments as List;
+    final subjectName = args[1].toString();
+    final id = args[0].toString();
 
     return Scaffold(
       body: SafeArea(
@@ -36,6 +38,18 @@ class _FlashCardListState extends State<FlashCardList> {
                       });
                     });
                   },
+                ),
+                Container(
+                  height: 30,
+                  width: 500,
+                  color: Colors.blue[200],
+                  child: Center(
+                    child: Text(
+                      (subjectName),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
                 Expanded(
                   child: FutureBuilder(

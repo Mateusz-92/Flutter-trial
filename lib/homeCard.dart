@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/addFlashCard.dart';
 import 'package:my_app/addHomeCardTmp.dart';
+import 'package:my_app/addSubjectAndCard.dart';
+import 'package:my_app/addSubjectForm.dart';
 import 'package:my_app/flashCardList.dart';
 import 'package:my_app/login.dart';
 import 'package:my_app/signUpScreen.dart';
@@ -17,6 +19,10 @@ class HomeCard extends StatefulWidget {
 class _HomeCardState extends State<HomeCard> {
   SupabaseManager supabaseManager = SupabaseManager();
   String datatable = 'card_box';
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +43,8 @@ class _HomeCardState extends State<HomeCard> {
                     return ListView.builder(
                         itemCount: snapshot.data!.length ?? 0,
                         itemBuilder: (context, index) {
+                          var cardBoxId = snapshot.data[index]['id'];
                           var subjects = snapshot.data![index]['subject'] ?? '';
-
                           var subject = subjects
                               .map((e) => {'name': e['name'], 'id': e['id']})
                               .toList();
@@ -48,11 +54,35 @@ class _HomeCardState extends State<HomeCard> {
                               ExpansionTile(
                                   title: Text(snapshot.data[index]['name']),
                                   children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  AddSubjectAndCard(),
+                                              settings: RouteSettings(
+                                                  arguments: cardBoxId)),
+                                        );
+                                      },
+                                      icon: Icon(Icons.add),
+                                    ),
                                     if (subjects.isEmpty)
                                       ListTile(
                                         title: IconButton(
                                           icon: Icon(Icons.add),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            // var cardBoxId =
+                                            //     snapshot.data[index]['id'];
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const AddSubjectAndCard(),
+                                                  settings: RouteSettings(
+                                                      arguments: cardBoxId)),
+                                            );
+                                          },
                                         ),
                                       )
                                     else
@@ -71,9 +101,13 @@ class _HomeCardState extends State<HomeCard> {
                                                                       const FlashCardList(),
                                                                   settings:
                                                                       RouteSettings(
-                                                                    arguments: {
-                                                                      e['id']
-                                                                    },
+                                                                    arguments: [
+                                                                      e['id'],
+                                                                      e['name'],
+                                                                    ],
+                                                                    // arguments: {
+                                                                    //   e['id']
+                                                                    // },
                                                                   ),
                                                                 ),
                                                               );
@@ -81,11 +115,20 @@ class _HomeCardState extends State<HomeCard> {
                                                             },
                                                             child: Text(
                                                                 e['name'])),
-                                                        IconButton(
-                                                          onPressed: () {},
-                                                          icon: Icon(
-                                                              Icons.delete),
-                                                        ),
+                                                        // IconButton(
+                                                        //   onPressed: () {
+                                                        //     Navigator.push(
+                                                        //       context,
+                                                        //       MaterialPageRoute(
+                                                        //           builder: (_) =>
+                                                        //               AddSubjectAndCard(),
+                                                        //           settings: RouteSettings(
+                                                        //               arguments:
+                                                        //                   cardBoxId)),
+                                                        //     );
+                                                        //   },
+                                                        //   icon: Icon(Icons.add),
+                                                        // ),
                                                       ],
                                                       mainAxisAlignment:
                                                           MainAxisAlignment

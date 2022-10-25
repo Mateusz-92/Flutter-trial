@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:my_app/addSubjectAndCard.dart';
 import 'package:my_app/addSubjectForm.dart';
 import 'package:my_app/addFlashCard.dart';
 import 'package:my_app/flashCardList.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       '/sign_up_screen': (_) => const SignupScreen(),
       '/home_card': (_) => const HomeCard(),
       '/login': (_) => const LoginScreen(),
+      '/add_subject_and_card': (_) => const AddSubjectAndCard(),
     }, home: const SignupScreen());
   }
 }

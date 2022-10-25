@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/homeCard.dart';
 import 'package:my_app/subjectCardList.dart';
 import 'package:my_app/supabase_manager.dart';
 
@@ -31,11 +32,13 @@ class _AddSubjectFormState extends State<AddSubjectForm> {
               BackButton(
                 color: Colors.black,
                 onPressed: () {
-                  Navigator.pop(context, () {
-                    setState(() {
-                      Subject();
-                    });
-                  });
+                  // Navigator.pop(context, () {
+                  //   setState(() {
+                  //     const HomeCard();
+                  //   });
+                  // });
+                  Navigator.pop(context,
+                      MaterialPageRoute(builder: (context) => HomeCard()));
                 },
               ),
               TextFormField(
@@ -49,8 +52,10 @@ class _AddSubjectFormState extends State<AddSubjectForm> {
                 iconSize: 45,
                 icon: const Icon(Icons.add_circle_sharp),
                 onPressed: () async {
-                  supabaseManager.addSubjectData(
-                      dataTable, subject.text, parentName, parentId);
+                  supabaseManager
+                      .addSubjectData(
+                          dataTable, subject.text, parentName, parentId)
+                      .toString();
                   setState(() {});
                   subject.text = '';
                 },
