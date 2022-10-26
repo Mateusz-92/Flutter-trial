@@ -32,11 +32,6 @@ class _AddSubjectFormState extends State<AddSubjectForm> {
               BackButton(
                 color: Colors.black,
                 onPressed: () {
-                  // Navigator.pop(context, () {
-                  //   setState(() {
-                  //     const HomeCard();
-                  //   });
-                  // });
                   Navigator.pop(context,
                       MaterialPageRoute(builder: (context) => HomeCard()));
                 },

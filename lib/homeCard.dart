@@ -54,90 +54,57 @@ class _HomeCardState extends State<HomeCard> {
                               ExpansionTile(
                                   title: Text(snapshot.data[index]['name']),
                                   children: [
+                                    ListTile(
+                                      title: Center(
+                                        child: Column(
+                                          children: subject
+                                              .map<Widget>((e) => Row(
+                                                    children: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    const FlashCardList(),
+                                                                settings:
+                                                                    RouteSettings(
+                                                                  arguments: [
+                                                                    e['id'],
+                                                                    e['name'],
+                                                                  ],
+                                                                  // arguments: {
+                                                                  //   e['id']
+                                                                  // },
+                                                                ),
+                                                              ),
+                                                            );
+                                                            print(e['id']);
+                                                          },
+                                                          child:
+                                                              Text(e['name'])),
+                                                    ],
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                  ))
+                                              .toList(),
+                                        ),
+                                      ),
+                                    ),
                                     IconButton(
                                       onPressed: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (_) =>
+                                              builder: (context) =>
                                                   AddSubjectAndCard(),
                                               settings: RouteSettings(
                                                   arguments: cardBoxId)),
-                                        );
+                                        ).then((value) => setState(() {}));
                                       },
                                       icon: Icon(Icons.add),
                                     ),
-                                    if (subjects.isEmpty)
-                                      ListTile(
-                                        title: IconButton(
-                                          icon: Icon(Icons.add),
-                                          onPressed: () {
-                                            // var cardBoxId =
-                                            //     snapshot.data[index]['id'];
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      const AddSubjectAndCard(),
-                                                  settings: RouteSettings(
-                                                      arguments: cardBoxId)),
-                                            );
-                                          },
-                                        ),
-                                      )
-                                    else
-                                      ListTile(
-                                        title: Center(
-                                          child: Column(
-                                            children: subject
-                                                .map<Widget>((e) => Row(
-                                                      children: [
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                  builder: (_) =>
-                                                                      const FlashCardList(),
-                                                                  settings:
-                                                                      RouteSettings(
-                                                                    arguments: [
-                                                                      e['id'],
-                                                                      e['name'],
-                                                                    ],
-                                                                    // arguments: {
-                                                                    //   e['id']
-                                                                    // },
-                                                                  ),
-                                                                ),
-                                                              );
-                                                              print(e['id']);
-                                                            },
-                                                            child: Text(
-                                                                e['name'])),
-                                                        // IconButton(
-                                                        //   onPressed: () {
-                                                        //     Navigator.push(
-                                                        //       context,
-                                                        //       MaterialPageRoute(
-                                                        //           builder: (_) =>
-                                                        //               AddSubjectAndCard(),
-                                                        //           settings: RouteSettings(
-                                                        //               arguments:
-                                                        //                   cardBoxId)),
-                                                        //     );
-                                                        //   },
-                                                        //   icon: Icon(Icons.add),
-                                                        // ),
-                                                      ],
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                    ))
-                                                .toList(),
-                                          ),
-                                        ),
-                                      ),
                                   ]),
                             ],
                           );

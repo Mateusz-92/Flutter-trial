@@ -41,7 +41,7 @@ class _FlashCardListState extends State<FlashCardList> {
                 ),
                 Container(
                   height: 30,
-                  width: 500,
+                  width: 400,
                   color: Colors.blue[200],
                   child: Center(
                     child: Text(

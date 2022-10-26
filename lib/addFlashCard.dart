@@ -55,6 +55,7 @@ class _FlashCardState extends State<FlashCard> {
                 iconSize: 45,
                 icon: const Icon(Icons.add_circle_sharp),
                 onPressed: () async {
+                  if (frontText.text == '' || backText.text == '') return;
                   supabaseManager
                       .addFlashCardData(
                           frontText.text, backText.text, parentName, parentId)

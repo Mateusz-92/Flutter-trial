@@ -49,6 +49,7 @@ class _AddHomeCardTmpState extends State<AddHomeCardTmp> {
                 iconSize: 45,
                 icon: const Icon(Icons.add_circle_sharp),
                 onPressed: () async {
+                  if (homeCard.text == '') return;
                   supabaseManager
                       .addHomeCardData(dataTable, homeCard.text, user)
                       .toString();

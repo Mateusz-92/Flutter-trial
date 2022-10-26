@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/homeCard.dart';
+import 'package:my_app/subjectCardList.dart';
 import 'package:my_app/supabase_manager.dart';
 import 'package:uuid/uuid.dart';
 
@@ -68,6 +69,7 @@ class _AddSubjectAndCardState extends State<AddSubjectAndCard> {
                 iconSize: 45,
                 icon: const Icon(Icons.add_circle_sharp),
                 onPressed: () async {
+                  if (subjectName.text == '') return;
                   supabaseManager
                       .addSubjectData2(dataTable, subjectName.text, parentName,
                           parentId, subId)
