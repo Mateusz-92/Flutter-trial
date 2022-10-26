@@ -20,7 +20,7 @@ class _FlashCardState extends State<FlashCard> {
     final parentId = ModalRoute.of(context)!.settings.arguments.toString();
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 168, 199, 224),
+      backgroundColor: Colors.blue[200],
       body: Center(
         child: SizedBox(
           width: 300,

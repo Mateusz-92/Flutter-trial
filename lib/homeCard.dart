@@ -28,6 +28,7 @@ class _HomeCardState extends State<HomeCard> {
   Widget build(BuildContext context) {
     var user = ModalRoute.of(context)!.settings.arguments.toString();
     return Scaffold(
+      backgroundColor: Colors.blue[200],
       body: Center(
         // child: SizedBox(
         //   height: 400,
@@ -52,9 +53,16 @@ class _HomeCardState extends State<HomeCard> {
                           return Column(
                             children: <Widget>[
                               ExpansionTile(
-                                  title: Text(snapshot.data[index]['name']),
+                                  backgroundColor: Colors.blue[300],
+                                  title: Text(
+                                    snapshot.data[index]['name'],
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                   children: [
                                     ListTile(
+                                      tileColor: Colors.blue[400],
                                       title: Center(
                                         child: Column(
                                           children: subject
@@ -73,16 +81,17 @@ class _HomeCardState extends State<HomeCard> {
                                                                     e['id'],
                                                                     e['name'],
                                                                   ],
-                                                                  // arguments: {
-                                                                  //   e['id']
-                                                                  // },
                                                                 ),
                                                               ),
                                                             );
                                                             print(e['id']);
                                                           },
-                                                          child:
-                                                              Text(e['name'])),
+                                                          child: Text(
+                                                            e['name'],
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black87),
+                                                          )),
                                                     ],
                                                     mainAxisAlignment:
                                                         MainAxisAlignment

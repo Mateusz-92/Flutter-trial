@@ -27,7 +27,7 @@ class _AddSubjectAndCardState extends State<AddSubjectAndCard> {
     var subId = uuid.v4();
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 168, 199, 224),
+      backgroundColor: Colors.blue[200],
       body: Center(
         child: SizedBox(
           width: 300,

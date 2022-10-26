@@ -18,10 +18,11 @@ class _FlashCardListState extends State<FlashCardList> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as List;
-    final subjectName = args[1].toString();
+    final subjectName = args[1].toString().toUpperCase();
     final id = args[0].toString();
 
     return Scaffold(
+      backgroundColor: Colors.blue[200],
       body: SafeArea(
         child: Center(
           child: SizedBox(
