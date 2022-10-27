@@ -54,11 +54,13 @@ class _HomeCardState extends State<HomeCard> {
                             children: <Widget>[
                               ExpansionTile(
                                   backgroundColor: Colors.blue[300],
-                                  title: Text(
-                                    snapshot.data[index]['name'],
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                                  title: Center(
+                                    child: Text(
+                                      snapshot.data[index]['name'],
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                   children: [
                                     ListTile(
@@ -68,7 +70,9 @@ class _HomeCardState extends State<HomeCard> {
                                           children: subject
                                               .map<Widget>((e) => Row(
                                                     children: [
-                                                      TextButton(
+                                                      Expanded(
+                                                        flex: 90,
+                                                        child: TextButton(
                                                           onPressed: () {
                                                             Navigator.push(
                                                               context,
@@ -91,7 +95,13 @@ class _HomeCardState extends State<HomeCard> {
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .black87),
-                                                          )),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      IconButton(
+                                                          onPressed: () {},
+                                                          icon:
+                                                              Icon(Icons.edit)),
                                                     ],
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -101,18 +111,21 @@ class _HomeCardState extends State<HomeCard> {
                                         ),
                                       ),
                                     ),
-                                    IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddSubjectAndCard(),
-                                              settings: RouteSettings(
-                                                  arguments: cardBoxId)),
-                                        ).then((value) => setState(() {}));
-                                      },
-                                      icon: Icon(Icons.add),
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddSubjectForm(),
+                                                settings: RouteSettings(
+                                                    arguments: cardBoxId)),
+                                          ).then((value) => setState(() {}));
+                                        },
+                                        icon: Icon(Icons.add),
+                                      ),
                                     ),
                                   ]),
                             ],

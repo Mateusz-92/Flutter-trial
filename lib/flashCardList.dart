@@ -57,7 +57,7 @@ class _FlashCardListState extends State<FlashCardList> {
                       future: supabaseManager.getData(datatable, subjectId, id),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.data == null) {
-                          return (const Text('...Loading'));
+                          return (const Text(''));
                         }
                         return ListView.builder(
                             itemCount: snapshot.data.length ?? 0,

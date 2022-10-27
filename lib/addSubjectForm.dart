@@ -47,6 +47,7 @@ class _AddSubjectFormState extends State<AddSubjectForm> {
                 iconSize: 45,
                 icon: const Icon(Icons.add_circle_sharp),
                 onPressed: () async {
+                  if (subject.text == '') return;
                   supabaseManager
                       .addSubjectData(
                           dataTable, subject.text, parentName, parentId)

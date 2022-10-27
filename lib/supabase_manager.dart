@@ -11,6 +11,7 @@ var client = SupabaseClient(supabaseUrl, supabaseKey);
 
 class SupabaseManager {
   var uuid = const Uuid();
+
   getCardBoxData(String datatable, var user) async {
     var response = await client
         .from('card_box')
