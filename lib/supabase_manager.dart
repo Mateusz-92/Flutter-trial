@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:my_app/updateCardBox.dart';
+import 'package:my_app/updateFlashCard.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,19 @@ var client = SupabaseClient(supabaseUrl, supabaseKey);
 class SupabaseManager {
   var uuid = const Uuid();
 
+  // getCardBoxData(String datatable, var user) async {
+  //   var response = await client
+  //       .from(datatable)
+  //       .select('name')
+  //       .eq('user_id', user)
+  //       .execute();
+
+  //   if (response.error == null) {
+  //     print('response.data: ${response.data}');
+  //   }
+  //   var dataList = response.data as List;
+  //   return dataList;
+  // }
   getCardBoxData(String datatable, var user) async {
     var response = await client
         .from('card_box')
@@ -80,6 +95,32 @@ class SupabaseManager {
     var respons = await client.from(datatable).delete().eq('id', id).execute();
   }
 
+  updataFlashCard(var fronText, var backText, var id) async {
+    await client
+        .from('card')
+        .update({'front_text': fronText, 'back_text': backText})
+        .eq('id', id)
+        .execute();
+  }
+
+  updateSubject(var subjectName, var id) async {
+    await client
+        .from('subject')
+        .update({'name': subjectName})
+        .eq('id', id)
+        .execute();
+  }
+
+  updateCardBox(var cardBoxName, var id) async {
+    await client
+        .from('card_box')
+        .update({
+          'name': cardBoxName,
+        })
+        .eq('id', id)
+        .execute();
+  }
+
   Future<void> signup(context, String email, String password) async {
     //debugPrint("emial $email password $password");
     final result = await client.auth.signUp(email, password);
@@ -110,4 +151,16 @@ class SupabaseManager {
     await client.auth.signOut();
     Navigator.pushReplacementNamed(context, '/login');
   }
+
+  // updateFlashCard(
+  //   var frontText,
+  //   var backText,
+  //   var id,
+  // ) async {
+  //   debugPrint("t1 : $frontText t2 $backText id : $id  ");
+  //   var res = await client.from('card').update({
+  //     'front_text': frontText,
+  //     'back_text': backText,
+  //   }).eq('id', id);
+  // }
 }

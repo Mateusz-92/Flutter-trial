@@ -7,6 +7,9 @@ import 'package:my_app/flashCardList.dart';
 import 'package:my_app/login.dart';
 import 'package:my_app/signUpScreen.dart';
 import 'package:my_app/supabase_manager.dart';
+import 'package:my_app/updateCardBox.dart';
+import 'package:my_app/updateFlashCard.dart';
+import 'package:my_app/updateSubject.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'subjectCardList.dart';
 
@@ -53,6 +56,35 @@ class _HomeCardState extends State<HomeCard> {
                           return Column(
                             children: <Widget>[
                               ExpansionTile(
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () async {
+                                          final nav = await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) => UpdateCardBox(),
+                                              settings: RouteSettings(
+                                                arguments: cardBoxId,
+                                              ),
+                                            ),
+                                          );
+                                          setState(() {});
+                                        },
+                                        icon: const Icon(Icons.edit),
+                                      ),
+                                      IconButton(
+                                        onPressed: () async {
+                                          await supabaseManager.deleteData(
+                                              'card_box',
+                                              snapshot.data[index]['id']);
+                                          setState(() {});
+                                        },
+                                        icon: const Icon(Icons.delete_forever),
+                                      ),
+                                    ],
+                                  ),
                                   backgroundColor: Colors.blue[300],
                                   title: Center(
                                     child: Text(
@@ -99,9 +131,35 @@ class _HomeCardState extends State<HomeCard> {
                                                         ),
                                                       ),
                                                       IconButton(
-                                                          onPressed: () {},
+                                                          onPressed: () async {
+                                                            final nav =
+                                                                await Navigator
+                                                                    .push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    UpdateSubject(),
+                                                                settings:
+                                                                    RouteSettings(
+                                                                  arguments:
+                                                                      e['id'],
+                                                                ),
+                                                              ),
+                                                            );
+                                                            setState(() {});
+                                                          },
                                                           icon:
                                                               Icon(Icons.edit)),
+                                                      IconButton(
+                                                          onPressed: () async {
+                                                            await supabaseManager
+                                                                .deleteData(
+                                                                    'subject',
+                                                                    e['id']);
+                                                            setState(() {});
+                                                          },
+                                                          icon: Icon(
+                                                              Icons.delete)),
                                                     ],
                                                     mainAxisAlignment:
                                                         MainAxisAlignment

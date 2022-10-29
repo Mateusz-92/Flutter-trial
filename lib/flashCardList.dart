@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/homeCard.dart';
 import 'package:my_app/supabase_manager.dart';
+import 'package:my_app/updateFlashCard.dart';
 import 'addFlashCard.dart';
 
 class FlashCardList extends StatefulWidget {
@@ -62,20 +63,53 @@ class _FlashCardListState extends State<FlashCardList> {
                         return ListView.builder(
                             itemCount: snapshot.data.length ?? 0,
                             itemBuilder: (context, index) {
+                              var flashCardId = snapshot.data[index]['id'];
+                              var subdId = snapshot.data[index]['subject_id'];
                               return Column(
                                 children: <Widget>[
                                   Card(
                                     color: Colors.blue[400],
                                     child: ListTile(
-                                      leading: IconButton(
-                                        onPressed: () async {
-                                          await supabaseManager.deleteData(
-                                              datatable,
-                                              snapshot.data[index]['id']);
-                                          setState(() {});
-                                        },
-                                        icon: const Icon(Icons.delete_forever),
+                                      trailing: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          IconButton(
+                                            onPressed: () async {
+                                              final nav = await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      const UpdateFlashCard(),
+                                                  settings: RouteSettings(
+                                                    arguments: flashCardId,
+                                                  ),
+                                                ),
+                                              );
+                                              setState(() {});
+                                            },
+                                            icon: const Icon(Icons.edit),
+                                          ),
+                                          IconButton(
+                                            onPressed: () async {
+                                              await supabaseManager.deleteData(
+                                                  datatable,
+                                                  snapshot.data[index]['id']);
+                                              setState(() {});
+                                            },
+                                            icon: const Icon(
+                                                Icons.delete_forever),
+                                          ),
+                                        ],
                                       ),
+                                      // leading: IconButton(
+                                      //   onPressed: () async {
+                                      //     await supabaseManager.deleteData(
+                                      //         datatable,
+                                      //         snapshot.data[index]['id']);
+                                      //     setState(() {});
+                                      //   },
+                                      //   icon: const Icon(Icons.delete_forever),
+                                      // ),
                                       subtitle: Center(
                                         child: Text(
                                             snapshot.data[index]['front_text']),
